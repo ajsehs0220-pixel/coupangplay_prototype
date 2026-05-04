@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setText(".allpass-display .div-summary-item-5 .text-wrapper-15", "3,000원");
     setText(".allpass-display .div-summary-item-6 .text-wrapper-15", "12,600원");
     setText(".allpass-display .allpay-original", "22,400원");
-    setText(".allpass-display .allpay-current", "22,400원");
+    setText(".allpass-display .allpay-current", "0원");
     setText(".allpass-display .button-cta .text-wrapper-21", "22,400원");
   }
 
