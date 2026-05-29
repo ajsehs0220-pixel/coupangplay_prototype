@@ -15,9 +15,9 @@ const TOP_TABS = [
 
 const MAIN_BANNERS = [
   { img: '/assets/banner_main_rolling_01.png', logo: '/assets/banner_main_rolling_01_logo.png', contentId: 'smile', logoHeight: 100, info: '오리지널 예능 · 13분', rating: '4.9' },
-  { img: '/assets/banner_main_rolling_04.png', logo: '/assets/banner_main_rolling_04_logo.png', contentId: 'focus', logoHeight: 70, info: '교양 · 15분', rating: '4.9' },
+  { img: '/assets/banner_main_rolling_04.png', logo: '/assets/banner_main_rolling_04_logo.png', contentId: 'drama', logoHeight: 70, info: '드라마 · 13분', rating: '4.9' },   // ← drama로
   { img: '/assets/banner_main_rolling_02.png', logo: '/assets/banner_main_rolling_02_logo.png', contentId: 'extra', logoHeight: 70, info: '스포츠 예능 · 15분', rating: '4.9' },
-  { img: '/assets/banner_main_rolling_03.png', logo: '/assets/banner_main_rolling_03_logo.png', contentId: 'drama', logoHeight: 70, info: '드라마 · 13분', rating: '4.9' },
+  { img: '/assets/banner_main_rolling_03.png', logo: '/assets/banner_main_rolling_03_logo.png', contentId: 'focus', logoHeight: 70, info: '교양 · 15분', rating: '4.9' },   // ← focus로
 ];
 
 export default function SpangHome() {

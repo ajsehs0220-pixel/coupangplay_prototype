@@ -104,6 +104,11 @@ export default function Detail() {
     content.reviews.map(r => ({ likes: r.likes, liked: false, disliked: false }))
   );
 
+  /* ───── 마운트 시 비디오 프리로드 ───── */
+  useEffect(() => {
+    if (videoRef.current) videoRef.current.load();
+  }, []);
+
   /* ───── 배너 타이머 (단일 배너) ───── */
   useEffect(() => {
     if (!isPlaying) return;
@@ -210,6 +215,7 @@ export default function Detail() {
           onLoadedMetadata={e => setDuration(e.target.duration)}
           onEnded={() => setIsPlaying(false)}
           playsInline
+          preload="auto"
         />
 
         {/* 그라디언트 오버레이 (세로 모드만, 컨트롤이 보일 때만) */}
