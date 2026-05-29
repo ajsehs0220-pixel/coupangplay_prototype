@@ -264,7 +264,7 @@ export default function Detail() {
             <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', display: 'flex', alignItems: 'center', gap: 36, pointerEvents: 'auto', zIndex: 22 }}
               onClick={e => e.stopPropagation()}>
               {/* 10초 뒤로 */}
-              <button id="btn_player_rewind" onClick={() => { trackClick('btn_player_rewind'); if (videoRef.current) videoRef.current.currentTime -= 10; }}
+              <button id="btn_detail_rewind" onClick={() => { trackClick('btn_detail_rewind'); if (videoRef.current) videoRef.current.currentTime -= 10; }}
                 style={{ background: 'none', border: 'none', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#fff" strokeWidth="1.8">
                   <path d="M6 18a12 12 0 1 1 2.4 7.2"/>
@@ -274,7 +274,7 @@ export default function Detail() {
               </button>
 
               {/* 재생/일시정지 - 둥근 스타일 */}
-              <button id="btn_player_play" onClick={() => { trackClick('btn_player_play', { isPlaying }); togglePlay(); }} style={{ background: 'none', border: 'none', color: '#fff' }}>
+              <button id="btn_detail_play_pause" onClick={() => { trackClick('btn_detail_play_pause', { isPlaying }); togglePlay(); }} style={{ background: 'none', border: 'none', color: '#fff' }}>
                 {isPlaying
                   ? (
                     <svg width="44" height="44" viewBox="0 0 24 24" fill="#fff">
@@ -290,7 +290,7 @@ export default function Detail() {
               </button>
 
               {/* 10초 앞으로 */}
-              <button id="btn_player_forward" onClick={() => { trackClick('btn_player_forward'); if (videoRef.current) videoRef.current.currentTime += 10; }}
+              <button id="btn_detail_forward" onClick={() => { trackClick('btn_detail_forward'); if (videoRef.current) videoRef.current.currentTime += 10; }}
                 style={{ background: 'none', border: 'none', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#fff" strokeWidth="1.8">
                   <path d="M30 18a12 12 0 1 0-2.4 7.2"/>
@@ -336,21 +336,21 @@ export default function Detail() {
 
               {/* 하단 버튼 행 */}
               <div style={{ display: 'flex', justifyContent: 'space-between', gap: 4, width: '100%' }}>
-                <button id="btn_player_recommend" onClick={() => { trackClick('btn_player_recommend'); showToast('추천 콘텐츠'); }}
+                <button id="btn_detail_player_recommend" onClick={() => { trackClick('btn_detail_player_recommend'); showToast('추천 콘텐츠'); }}
                   style={{ display: 'flex', alignItems: 'center', gap: 4, background: 'rgba(30,30,30,0.85)', border: 'none', color: '#fff', padding: '6px 8px', borderRadius: 8, fontSize: 11, cursor: 'pointer', flex: 1.5 }}>
                   <img src={content.episodes[0]?.thumb} alt="" style={{ width: 22, height: 22, borderRadius: 3, objectFit: 'cover', flexShrink: 0 }}/>
                   <span style={{ whiteSpace: 'nowrap' }}>추천 콘텐츠 ∧</span>
                 </button>
-                <button id="btn_player_prev_ep" onClick={() => { trackClick('btn_player_prev_ep', { currentEp }); if (currentEp > 0) { setCurrentEp(currentEp - 1); setCurrentTime(0); if (videoRef.current) videoRef.current.currentTime = 0; showToast(`${currentEp}화로 이동`); } else showToast('첫 번째 화입니다'); }}
+                <button id="btn_detail_prev_ep" onClick={() => { trackClick('btn_detail_prev_ep', { currentEp }); if (currentEp > 0) { setCurrentEp(currentEp - 1); setCurrentTime(0); if (videoRef.current) videoRef.current.currentTime = 0; showToast(`${currentEp}화로 이동`); } else showToast('첫 번째 화입니다'); }}
                   style={{ display: 'flex', alignItems: 'center', gap: 3, background: 'rgba(30,30,30,0.85)', border: 'none', color: '#fff', padding: '6px 8px', borderRadius: 8, fontSize: 11, cursor: 'pointer', flex: 1, whiteSpace: 'nowrap' }}>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="#fff" flexShrink="0"><polygon points="19,5 9,12 19,19"/><rect x="5" y="5" width="2" height="14" fill="#fff"/></svg>
                   이전화
                 </button>
-                <button id="btn_player_episode_list" onClick={() => { trackClick('btn_player_episode_list'); if (document.fullscreenElement) document.exitFullscreen?.(); setActiveTab('btn_detail_tab_episode'); window.scrollTo({ top: 400, behavior: 'smooth' }); }}
+                <button id="btn_detail_episode_list" onClick={() => { trackClick('btn_detail_episode_list'); if (document.fullscreenElement) document.exitFullscreen?.(); setActiveTab('btn_detail_tab_episode'); window.scrollTo({ top: 400, behavior: 'smooth' }); }}
                   style={{ background: 'rgba(30,30,30,0.85)', border: 'none', color: '#fff', padding: '6px 8px', borderRadius: 8, fontSize: 11, cursor: 'pointer', flex: 1.2, whiteSpace: 'nowrap' }}>
                   에피소드 목록
                 </button>
-                <button id="btn_player_next_ep" onClick={() => { trackClick('btn_player_next_ep', { currentEp }); if (currentEp < content.episodes.length - 1) { setCurrentEp(currentEp + 1); setCurrentTime(0); if (videoRef.current) videoRef.current.currentTime = 0; showToast(`${currentEp + 2}화로 이동`); } else showToast('마지막 화입니다'); }}
+                <button id="btn_detail_next_ep" onClick={() => { trackClick('btn_detail_next_ep', { currentEp }); if (currentEp < content.episodes.length - 1) { setCurrentEp(currentEp + 1); setCurrentTime(0); if (videoRef.current) videoRef.current.currentTime = 0; showToast(`${currentEp + 2}화로 이동`); } else showToast('마지막 화입니다'); }}
                   style={{ display: 'flex', alignItems: 'center', gap: 3, background: 'rgba(30,30,30,0.85)', border: 'none', color: '#fff', padding: '6px 8px', borderRadius: 8, fontSize: 11, cursor: 'pointer', flex: 1, whiteSpace: 'nowrap' }}>
                   다음화
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><polygon points="5,5 15,12 5,19"/><rect x="17" y="5" width="2" height="14" fill="#fff"/></svg>
@@ -368,15 +368,15 @@ export default function Detail() {
               <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: 2 }}>
                 {canClose && (
                   <button
-                    id="btn_ad_close"
-                    onClick={() => { trackClick('btn_ad_close'); setShowAdBanner(false); }}
+                    id="btn_detail_ad_close"
+                    onClick={() => { trackClick('btn_detail_ad_close'); setShowAdBanner(false); }}
                     style={{ background: 'rgba(0,0,0,0.6)', border: 'none', borderRadius: '50%', width: 16, height: 16, color: '#fff', fontSize: 9, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                   >✕</button>
                 )}
               </div>
               <button
-                id="btn_ad_banner"
-                onClick={() => { trackClick('btn_ad_banner', { url: content.banners[0].url }); window.open(content.banners[0].url, '_blank'); }}
+                id="btn_detail_ad_banner"
+                onClick={() => { trackClick('btn_detail_ad_banner', { url: content.banners[0].url }); window.open(content.banners[0].url, '_blank'); }}
                 style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'block' }}
               >
                 <img
@@ -410,9 +410,9 @@ export default function Detail() {
 
             {/* 1화 이어보기 버튼 */}
             <button
-              id={`btn_play_${id}`}
+              id={`btn_detail_play_${id}`}
               onClick={() => {
-                trackClick(`btn_play_${id}`, { contentId: id });
+                trackClick(`btn_detail_play_${id}`, { contentId: id });
                 if (videoRef.current) {
                   videoRef.current.play();
                   setIsPlaying(true);
@@ -470,12 +470,12 @@ export default function Detail() {
             {activeTab === 'btn_detail_tab_episode' && (
               <div>
                 <div style={{ display: 'flex', gap: 8, marginBottom: 25 }}>
-                  {['전체 회차', '최신 순'].map(label => (
-                    <button key={label} id={`btn_ep_filter_${label}`} onClick={() => trackClick(`btn_ep_filter_${label}`, { label })} style={{ flex: 1, padding: '6px 14px', borderRadius: 20, fontSize: 13, background: '#222', color: '#ccc', border: '1px solid #333', cursor: 'pointer' }}>
+                  {['전체 회차', '최신 순'].map((label, fi) => (
+                    <button key={label} id={`btn_detail_ep_filter_${fi}`} onClick={() => trackClick(`btn_detail_ep_filter_${fi}`, { label })} style={{ flex: 1, padding: '6px 14px', borderRadius: 20, fontSize: 13, background: '#222', color: '#ccc', border: '1px solid #333', cursor: 'pointer' }}>
                       {label}
                     </button>
                   ))}
-                  <button id="btn_ep_search" onClick={() => trackClick('btn_ep_search')} style={{ flex: 1.5, padding: '6px 14px', borderRadius: 20, fontSize: 13, background: '#222', color: '#ccc', border: '1px solid #333', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 35 }}>
+                  <button id="btn_detail_ep_search" onClick={() => trackClick('btn_detail_ep_search')} style={{ flex: 1.5, padding: '6px 14px', borderRadius: 20, fontSize: 13, background: '#222', color: '#ccc', border: '1px solid #333', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 35 }}>
                     <SearchIcon size={14} />검색
                   </button>
                 </div>
@@ -483,9 +483,9 @@ export default function Detail() {
                 {content.episodes.map(ep => (
                   <div key={ep.num} style={{ marginBottom: 30, borderBottom: '1px solid #222', paddingBottom: 18 }}>
                     <button
-                      id={`btn_ep_${ep.num}`}
+                      id={`btn_detail_ep_${ep.num}`}
                       onClick={() => {
-                        trackClick(`btn_ep_${ep.num}`, { epNum: ep.num, epTitle: ep.title });
+                        trackClick(`btn_detail_ep_${ep.num}`, { epNum: ep.num, epTitle: ep.title });
                         if (videoRef.current) {
                           videoRef.current.play();
                           setIsPlaying(true);
@@ -498,7 +498,7 @@ export default function Detail() {
                         <p style={{ fontSize: 14, fontWeight: 700, marginBottom: 4 }}>{ep.num}. {ep.title}</p>
                         <p style={{ fontSize: 12, color: '#888', marginTop: 6 }}>{ep.date} · {ep.runtime}</p>
                       </div>
-                      <button id={`btn_ep_download_${ep.num}`} onClick={e => { e.stopPropagation(); trackClick(`btn_ep_download_${ep.num}`, { epNum: ep.num }); showToast('다운로드 준비 중입니다'); }}
+                      <button id={`btn_detail_ep_download_${ep.num}`} onClick={e => { e.stopPropagation(); trackClick(`btn_detail_ep_download_${ep.num}`, { epNum: ep.num }); showToast('다운로드 준비 중입니다'); }}
                         style={{ background: 'none', border: 'none', color: '#aaa', cursor: 'pointer', flexShrink: 0 }}>
                         <DownloadIcon size={21.5} />
                       </button>
@@ -531,17 +531,17 @@ export default function Detail() {
                         </div>
                         <span style={{ fontSize: 12, color: '#888' }}>· {r.date}</span>
                       </div>
-                      <button style={{ background: 'none', border: 'none', color: '#666', fontSize: 18, cursor: 'pointer' }}>⋮</button>
+                      <button id={`btn_detail_review_more_${i}`} style={{ background: 'none', border: 'none', color: '#666', fontSize: 18, cursor: 'pointer' }}>⋮</button>
                     </div>
                     <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#7B2FBE', marginBottom: 8 }} />
                     <p style={{ fontSize: 14, color: '#ddd', lineHeight: 1.6, marginBottom: 12, whiteSpace: 'pre-line' }}>{r.text}</p>
                     <div style={{ display: 'flex', gap: 8 }}>
-                      <button id={`btn_review_like_${i}`} onClick={() => { trackClick(`btn_review_like_${i}`, { index: i }); handleLike(i); }}
+                      <button id={`btn_detail_review_like_${i}`} onClick={() => { trackClick(`btn_detail_review_like_${i}`, { index: i }); handleLike(i); }}
                         style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#222', border: 'none', color: reviewLikes[i].liked ? '#1A6DFF' : '#fff', padding: '6px 14px', borderRadius: 20, fontSize: 13, cursor: 'pointer' }}>
                         <ThumbUpIcon size={16} color="#fff" filled={reviewLikes[i].liked} />
                         {reviewLikes[i].likes.toLocaleString()}
                       </button>
-                      <button id={`btn_review_dislike_${i}`} onClick={() => { trackClick(`btn_review_dislike_${i}`, { index: i }); handleDislike(i); }}
+                      <button id={`btn_detail_review_dislike_${i}`} onClick={() => { trackClick(`btn_detail_review_dislike_${i}`, { index: i }); handleDislike(i); }}
                         style={{ background: '#222', border: 'none', padding: '6px 14px', borderRadius: 20, cursor: 'pointer' }}>
                         <ThumbDownIcon size={16} color={reviewLikes[i].disliked ? '#1A6DFF' : '#fff'} />
                       </button>
@@ -561,7 +561,7 @@ export default function Detail() {
                     { src: '/assets/poster_bookstore.png', id: null },
                     { src: '/assets/poster_15focus.png', id: 'focus' },
                   ].map((item, i) => (
-                    <button key={i} id={`btn_rec_${item.id || i}`} onClick={() => { trackClick(`btn_rec_${item.id || i}`, { contentId: item.id }); item.id ? navigate(`/detail/${item.id}`) : showToast('준비 중입니다'); }}
+                    <button key={i} id={`btn_detail_rec_${item.id || i}`} onClick={() => { trackClick(`btn_detail_rec_${item.id || i}`, { contentId: item.id }); item.id ? navigate(`/detail/${item.id}`) : showToast('준비 중입니다'); }}
                       style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
                       <img src={item.src} alt="" style={{ width: '100%', aspectRatio: '2/3', objectFit: 'cover', borderRadius: 6 }} />
                     </button>
@@ -574,7 +574,7 @@ export default function Detail() {
                     { src: '/assets/poster_nextlegend.png', id: null },
                     { src: '/assets/poster_soccer.png', id: null },
                   ].map((item, i) => (
-                    <button key={i} id={`btn_rec_sports_${item.id || i}`} onClick={() => { trackClick(`btn_rec_sports_${item.id || i}`, { contentId: item.id }); item.id ? navigate(`/detail/${item.id}`) : showToast('준비 중입니다'); }}
+                    <button key={i} id={`btn_detail_rec_sports_${item.id || i}`} onClick={() => { trackClick(`btn_detail_rec_sports_${item.id || i}`, { contentId: item.id }); item.id ? navigate(`/detail/${item.id}`) : showToast('준비 중입니다'); }}
                       style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
                       <img src={item.src} alt="" style={{ width: '100%', aspectRatio: '2/3', objectFit: 'cover', borderRadius: 6 }} />
                     </button>

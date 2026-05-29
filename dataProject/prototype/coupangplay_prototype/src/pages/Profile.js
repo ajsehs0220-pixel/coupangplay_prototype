@@ -5,10 +5,10 @@ import Toast, { showToast } from '../components/Toast';
 import { trackClick } from '../utils/track';
 
 const WISHLIST = [
-  { img: '/assets/poster_soccer.png' },
-  { img: '/assets/poster_bakery.png' },
-  { img: '/assets/poster_nextlegend.png' },
-  { img: '/assets/poster_textbook.png' },
+  { id: 'soccer', img: '/assets/poster_soccer.png' },
+  { id: 'bakery', img: '/assets/poster_bakery.png' },
+  { id: 'nextlegend', img: '/assets/poster_nextlegend.png' },
+  { id: 'textbook', img: '/assets/poster_textbook.png' },
 ];
 
 const RECOMMEND = [
@@ -49,7 +49,7 @@ export default function Profile() {
             <p style={{ fontSize: 12, color: '#4A90FF', fontWeight: 400 }}>WOW! 와우회원</p>
           </div>
         </div>
-        <button id="btn_profile_settings" onClick={() => { trackClick('btn_profile_settings'); navigate('/settings'); }} style={{ background: 'none', border: 'none', padding: 4, cursor: 'pointer' }}>
+        <button id="btn_profile_header_settings" onClick={() => { trackClick('btn_profile_header_settings'); navigate('/settings'); }} style={{ background: 'none', border: 'none', padding: 4, cursor: 'pointer' }}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="3"/>
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l-.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
@@ -113,8 +113,8 @@ export default function Profile() {
             </div>
             <div style={{ display: 'flex', gap: 8 }}>
               <button
-                id="btn_mypage_coupon_use"
-                onClick={() => { trackClick('btn_mypage_coupon_use'); window.open('https://www.coupang.com', '_blank'); }}
+                id="btn_profile_cash_coupon"
+                onClick={() => { trackClick('btn_profile_cash_coupon'); window.open('https://www.coupang.com', '_blank'); }}
                 style={{
                   flex: 1, background: '#0B1220',
                   border: '1px solid rgba(255,255,255,0.15)',
@@ -129,8 +129,8 @@ export default function Profile() {
                 쿠팡에서 사용하기
               </button>
               <button
-                id="btn_mypage_eats_use"
-                onClick={() => { trackClick('btn_mypage_eats_use'); window.open('https://web.coupangeats.com/share?storeId=756683&dishId=107238778&key=4e00e7af-4bf7-4e17-8108-4e8fc8af37f7', '_blank'); }}
+                id="btn_profile_cash_eats"
+                onClick={() => { trackClick('btn_profile_cash_eats'); window.open('https://web.coupangeats.com/share?storeId=756683&dishId=107238778&key=4e00e7af-4bf7-4e17-8108-4e8fc8af37f7', '_blank'); }}
                 style={{
                   flex: 1, background: '#0B1220',
                   border: '1px solid rgba(255,255,255,0.15)',
@@ -151,9 +151,9 @@ export default function Profile() {
         {/* 찜한 콘텐츠 */}
         <div style={{ marginBottom: 24 }}>
           <button
-            id="btn_mypage_wishlist"
+            id="btn_profile_wishlist_title"
             style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 12, background: 'none', border: 'none', color: '#fff', padding: 0 }}
-            onClick={() => trackClick('btn_mypage_wishlist')}
+            onClick={() => trackClick('btn_profile_wishlist_title')}
           >
             <span style={{ fontSize: 15, fontWeight: 700 }}>찜한 콘텐츠 ›</span>
           </button>
@@ -161,6 +161,7 @@ export default function Profile() {
             {WISHLIST.map((item, idx) => (
               <img
                 key={idx}
+                id={`btn_profile_wishlist_${item.id}_${idx}`}
                 src={item.img}
                 alt=""
                 onClick={() => showToast('준비 중입니다')}
@@ -172,16 +173,17 @@ export default function Profile() {
 
         {/* 회원님이 좋아할 만한 콘텐츠 */}
         <div style={{ marginBottom: 24 }}>
-          <button id="btn_mypage_recommend" onClick={() => trackClick('btn_mypage_recommend')} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 12, background: 'none', border: 'none', color: '#fff', padding: 0 }}>
+          <button id="btn_profile_rec_title" onClick={() => trackClick('btn_profile_rec_title')} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 12, background: 'none', border: 'none', color: '#fff', padding: 0 }}>
             <span style={{ fontSize: 15, fontWeight: 700 }}>회원님이 좋아할 만한 콘텐츠 ›</span>
           </button>
           <div style={{ display: 'flex', gap: 8, overflowX: 'auto', scrollbarWidth: 'none' }}>
-            {RECOMMEND.map(item => (
+            {RECOMMEND.map((item, idx) => (
               <img
                 key={item.id}
+                id={`btn_profile_rec_${item.id}_${idx}`}
                 src={item.img}
                 alt=""
-                onClick={() => { trackClick(`btn_recommend_${item.id}`); navigate(`/detail/${item.id}`); }}
+                onClick={() => { trackClick(`btn_profile_rec_${item.id}_${idx}`); navigate(`/detail/${item.id}`); }}
                 style={{ width: 90, height: 130, borderRadius: 8, objectFit: 'cover', flexShrink: 0, cursor: 'pointer' }}
               />
             ))}

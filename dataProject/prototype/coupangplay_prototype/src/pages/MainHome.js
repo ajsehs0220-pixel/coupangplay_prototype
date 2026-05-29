@@ -5,23 +5,23 @@ import Toast, { showToast } from '../components/Toast';
 import { trackClick } from '../utils/track';
 
 const TOP_TABS = [
-  { id: 'btn_top_spang', label: '스팡', path: '/spang' },
-  { id: 'btn_top_tv', label: 'TV', path: null },
-  { id: 'btn_top_movie', label: '영화', path: null },
-  { id: 'btn_top_sports', label: '스포츠', path: null },
-  { id: 'btn_top_live', label: '라이브', path: null },
+  { id: 'btn_main_tab_spang', label: '스팡', path: '/spang' },
+  { id: 'btn_main_tab_tv', label: 'TV', path: null },
+  { id: 'btn_main_tab_movie', label: '영화', path: null },
+  { id: 'btn_main_tab_sports', label: '스포츠', path: null },
+  { id: 'btn_main_tab_live', label: '라이브', path: null },
 ];
 
 const BOTTOM_BANNERS = [
-  { id: 'banner_bakery', img: '/assets/program_bakery.png', action: 'toast', msg: '준비 중입니다' },
-  { id: 'btn_event_dessert', img: '/assets/bakery_cp_item.png', action: 'link', url: 'https://pages.coupang.com/p/169503?sourceType=oms_share' },
-  { id: 'banner_tteok', img: '/assets/otoki_cp_item.png', action: 'link', url: 'https://web.coupangeats.com/share?storeId=449022&dishId&key=69e31288-77f8-4225-a659-1fa1845fb06b' },
-  { id: 'btn_event_predict', img: '/assets/sports_pass_event.png', action: 'page', path: '/pass-detail' },
+  { id: 'btn_main_banner_bakery', img: '/assets/program_bakery.png', action: 'toast', msg: '준비 중입니다' },
+  { id: 'btn_main_banner_dessert', img: '/assets/bakery_cp_item.png', action: 'link', url: 'https://pages.coupang.com/p/169503?sourceType=oms_share' },
+  { id: 'btn_main_banner_tteok', img: '/assets/otoki_cp_item.png', action: 'link', url: 'https://web.coupangeats.com/share?storeId=449022&dishId&key=69e31288-77f8-4225-a659-1fa1845fb06b' },
+  { id: 'btn_main_banner_predict', img: '/assets/sports_pass_event.png', action: 'page', path: '/pass-detail' },
 ];
 
 export default function MainHome() {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('btn_top_spang');
+  const [activeTab, setActiveTab] = useState('btn_main_tab_spang');
 
   function handleTab(tab) {
     trackClick(tab.id, { label: tab.label });
@@ -48,8 +48,8 @@ export default function MainHome() {
           <img src="/assets/coupangplay.png" alt="쿠팡플레이" style={{ height: 16, objectFit: 'contain' }} />
         </div>
         <button
-          id="btn_category"
-          onClick={() => { trackClick('btn_category'); showToast('준비 중입니다'); }}
+          id="btn_main_header_category"
+          onClick={() => { trackClick('btn_main_header_category'); showToast('준비 중입니다'); }}
           style={{
             display: 'flex',
             width: '77.634px',
@@ -81,7 +81,7 @@ export default function MainHome() {
             style={{
               flexShrink: 0, padding: '8px 18px', fontSize: 14, fontWeight: 600,
               boxSizing: 'border-box', transition: 'all 0.2s',
-              ...(activeTab === tab.id && tab.id === 'btn_top_spang'
+              ...(activeTab === tab.id && tab.id === 'btn_main_tab_spang'
                 ? {
                     borderRadius: '16.45px',
                     border: '1px solid transparent',
@@ -118,7 +118,7 @@ export default function MainHome() {
         </div>
 
         {/* 메인 포스터 이미지 */}
-        <div style={{ position: 'relative', cursor: 'pointer' }} onClick={() => navigate('/detail/smile')}>
+        <div id="btn_main_hero_smile" style={{ position: 'relative', cursor: 'pointer' }} onClick={() => navigate('/detail/smile')}>
           <img
             src="/assets/img_Main_home.png"
             alt="SNL Korea"
@@ -139,8 +139,8 @@ export default function MainHome() {
               <span style={{ fontSize: 13, color: '#ddd' }}>4.3 · 예능 · 1시간 21분</span>
             </div>
             <button
-              id="btn_main_play"
-              onClick={e => { e.stopPropagation(); trackClick('btn_main_play', { contentId: 'smile' }); navigate('/detail/smile'); }}
+              id="btn_main_hero_play_smile"
+              onClick={e => { e.stopPropagation(); trackClick('btn_main_hero_play_smile', { contentId: 'smile' }); navigate('/detail/smile'); }}
               style={{
                 width: '100%', background: '#0075FF', color: '#fff',
                 padding: '13px 0', borderRadius: 8, fontWeight: 700, fontSize: 16,

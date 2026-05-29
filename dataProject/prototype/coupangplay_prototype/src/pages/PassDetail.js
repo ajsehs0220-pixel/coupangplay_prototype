@@ -20,16 +20,16 @@ export default function PassDetail() {
         />
         {/* 뒤로가기 */}
         <button
-          id="btn_passdetail_back"
-          onClick={() => { trackClick('btn_passdetail_back'); navigate(-1); }}
+          id="btn_pass_back"
+          onClick={() => { trackClick('btn_pass_back'); navigate(-1); }}
           style={{ position: 'absolute', top: 16, left: 16, zIndex: 10, fontSize: 26, color: '#fff', background: 'none', border: 'none', padding: '4px 8px', cursor: 'pointer', lineHeight: 1 }}
         >
           ←
         </button>
         {/* 닫기 */}
         <button
-          id="btn_passdetail_close"
-          onClick={() => { trackClick('btn_passdetail_close'); navigate('/'); }}
+          id="btn_pass_close"
+          onClick={() => { trackClick('btn_pass_close'); navigate('/'); }}
           style={{ position: 'absolute', top: 16, right: 16, zIndex: 10, fontSize: 20, color: '#fff', background: 'none', border: 'none', padding: '4px 8px', cursor: 'pointer', lineHeight: 1 }}
         >
           ✕
@@ -48,8 +48,8 @@ export default function PassDetail() {
       {/* 구독 버튼 — 이미지 바로 아래 */}
       <div style={{ padding: '16px 20px' }}>
         <button
-          id="btn_passdetail_subscribe"
-          onClick={() => { trackClick('btn_passdetail_subscribe'); showToast('준비 중입니다'); }}
+          id="btn_pass_subscribe"
+          onClick={() => { trackClick('btn_pass_subscribe'); showToast('준비 중입니다'); }}
           style={{
             width: '100%', background: 'linear-gradient(150deg, #FF8C00 20%, #FFA500 80%)',
             color: '#fff', padding: '16px 0', borderRadius: 30,
@@ -74,11 +74,11 @@ export default function PassDetail() {
 
       {/* 스포츠 종목 탭 */}
       <div style={{ display: 'flex', gap: 8, padding: '0 16px', overflowX: 'auto', scrollbarWidth: 'none', marginBottom: 15 }}>
-        {['⚽ 축구', '🏀 농구', '🏎 모터스포츠', '🏈 기타 스포츠'].map(sport => (
+        {['⚽ 축구', '🏀 농구', '🏎 모터스포츠', '🏈 기타 스포츠'].map((sport, si) => (
           <button
             key={sport}
-            id={`btn_sport_${sport}`}
-            onClick={() => { trackClick(`btn_sport_${sport}`, { sport }); showToast('준비 중입니다'); }}
+            id={`btn_pass_sport_${si}`}
+            onClick={() => { trackClick(`btn_pass_sport_${si}`, { sport }); showToast('준비 중입니다'); }}
             style={{ flexShrink: 0, padding: '8px 14px', borderRadius: 20, border: '1px solid #444', fontSize: 13, color: '#fff', background: 'transparent' }}
           >
             {sport}
@@ -140,11 +140,11 @@ export default function PassDetail() {
               sub: '2026년 5월 1일 (목) · La Liga',
               duration: '10:25',
             },
-          ].map(v => (
+          ].map((v, vi) => (
             <button
               key={v.title}
-              id={`btn_pass_video_${v.title}`}
-              onClick={() => { trackClick('btn_pass_video', { title: v.title }); showToast('스포츠 패스 구독 후 이용 가능합니다'); }}
+              id={`btn_pass_video_${vi}`}
+              onClick={() => { trackClick(`btn_pass_video_${vi}`, { title: v.title }); showToast('스포츠 패스 구독 후 이용 가능합니다'); }}
               style={{ borderRadius: 8, overflow: 'hidden', background: '#111', textAlign: 'left', border: 'none', padding: 0, cursor: 'pointer' }}
             >
               {/* 썸네일 */}

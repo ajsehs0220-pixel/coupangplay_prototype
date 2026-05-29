@@ -6,11 +6,11 @@ import { HOME_CATEGORIES, CONTENTS } from '../data/contents';
 import { trackClick } from '../utils/track';
 
 const TOP_TABS = [
-  { id: 'btn_top_spang', label: '스팡', active: true },
-  { id: 'btn_top_tv', label: 'TV' },
-  { id: 'btn_top_movie', label: '영화' },
-  { id: 'btn_top_sports', label: '스포츠' },
-  { id: 'btn_top_live', label: '라이브' },
+  { id: 'btn_spang_tab_spang', label: '스팡', active: true },
+  { id: 'btn_spang_tab_tv', label: 'TV' },
+  { id: 'btn_spang_tab_movie', label: '영화' },
+  { id: 'btn_spang_tab_sports', label: '스포츠' },
+  { id: 'btn_spang_tab_live', label: '라이브' },
 ];
 
 const MAIN_BANNERS = [
@@ -20,10 +20,18 @@ const MAIN_BANNERS = [
   { img: '/assets/banner_main_rolling_03.png', logo: '/assets/banner_main_rolling_03_logo.png', contentId: 'focus', logoHeight: 70, info: '교양 · 15분', rating: '4.9' },   // ← focus로
 ];
 
+const CAT_KEYS = {
+  '새로 올라온 스팡 콘텐츠': 'new',
+  '오리지널 예능': 'orig',
+  '스포츠 예능': 'sports',
+  '드라마': 'drama',
+  '일상의 깊이를 더하는 지적 플렉스': 'flex',
+};
+
 export default function SpangHome() {
   const navigate = useNavigate();
   const [bannerIdx, setBannerIdx] = useState(0);
-  const [activeTopTab, setActiveTopTab] = useState('btn_top_spang');
+  const [activeTopTab, setActiveTopTab] = useState('btn_spang_tab_spang');
   const bannerScrollRef = useRef(null);
 
   useEffect(() => {
@@ -47,7 +55,7 @@ export default function SpangHome() {
   }
 
   function handleDotClick(i) {
-    trackClick(`btn_banner_dot_${i}`, { index: i });
+    trackClick(`btn_spang_banner_dot_${i}`, { index: i });
     if (bannerScrollRef.current) {
       const width = bannerScrollRef.current.offsetWidth;
       bannerScrollRef.current.scrollTo({ left: i * width, behavior: 'smooth' });
@@ -58,7 +66,7 @@ export default function SpangHome() {
   function handleTopTab(tab) {
     trackClick(tab.id, { label: tab.label });
     setActiveTopTab(tab.id);
-    if (tab.id !== 'btn_top_spang') showToast('준비 중입니다');
+    if (tab.id !== 'btn_spang_tab_spang') showToast('준비 중입니다');
   }
 
   return (
@@ -71,8 +79,8 @@ export default function SpangHome() {
           <img src="/assets/coupangplay.png" alt="쿠팡플레이" style={{ height: 16, objectFit: 'contain' }} />
         </div>
         <button
-          id="btn_category"
-          onClick={() => { trackClick('btn_category'); showToast('준비 중입니다'); }}
+          id="btn_spang_header_category"
+          onClick={() => { trackClick('btn_spang_header_category'); showToast('준비 중입니다'); }}
           style={{
             display: 'flex',
             width: '77.634px',
@@ -104,7 +112,7 @@ export default function SpangHome() {
             style={{
               flexShrink: 0, padding: '8px 18px', fontSize: 14, fontWeight: 600,
               boxSizing: 'border-box', transition: 'all 0.2s',
-              ...(activeTopTab === tab.id && tab.id === 'btn_top_spang'
+              ...(activeTopTab === tab.id && tab.id === 'btn_spang_tab_spang'
                 ? {
                     borderRadius: '16.45px',
                     border: '1px solid transparent',
@@ -148,6 +156,7 @@ export default function SpangHome() {
           {MAIN_BANNERS.map((banner, idx) => (
             <div
               key={idx}
+              id={`btn_spang_banner_${banner.contentId}_${idx}`}
               style={{ flex: '0 0 100%', scrollSnapAlign: 'start', position: 'relative', cursor: 'pointer' }}
               onClick={() => navigate(`/detail/${banner.contentId}`)}
             >
@@ -164,8 +173,8 @@ export default function SpangHome() {
                   <span style={{ fontSize: 13, color: '#ddd' }}>{banner.rating} · {banner.info}</span>
                 </div>
                 <button
-                  id={`btn_main_play_${idx}`}
-                  onClick={e => { e.stopPropagation(); trackClick('btn_main_play', { contentId: banner.contentId }); navigate(`/detail/${banner.contentId}`); }}
+                  id={`btn_spang_banner_play_${banner.contentId}_${idx}`}
+                  onClick={e => { e.stopPropagation(); trackClick(`btn_spang_banner_play_${banner.contentId}`, { contentId: banner.contentId }); navigate(`/detail/${banner.contentId}`); }}
                   style={{
                     width: '100%', background: '#0075FF', color: '#fff',
                     padding: '13px 0', borderRadius: 8, fontWeight: 700, fontSize: 16,
@@ -183,7 +192,7 @@ export default function SpangHome() {
       {/* 배너 dots */}
       <div style={{ display: 'flex', justifyContent: 'center', gap: 6, marginTop: 10, marginBottom: 25 }}>
         {MAIN_BANNERS.map((_, i) => (
-          <button key={i} id={`btn_banner_dot_${i}`} onClick={() => handleDotClick(i)}
+          <button key={i} id={`btn_spang_banner_dot_${i}`} onClick={() => handleDotClick(i)}
             style={{ width: i === bannerIdx ? 30 : 13, height: 6, borderRadius: 5, background: i === bannerIdx ? '#fff' : '#555', transition: 'all 0.3s', border: 'none' }} />
         ))}
       </div>
@@ -196,7 +205,7 @@ export default function SpangHome() {
           </div>
           <div style={{ display: 'flex', gap: 8, paddingLeft: 16, overflowX: 'auto', scrollbarWidth: 'none' }}>
             {cat.items.map((item, idx) => (
-              <button key={idx} id={`btn_cat_${item.contentId}_${idx}`} onClick={() => { trackClick(`btn_cat_${item.contentId}`, { contentId: item.contentId, category: cat.label }); navigate(`/detail/${item.contentId}`); }} style={{ flexShrink: 0, width: 110, textAlign: 'left' }}>
+              <button key={idx} id={`btn_spang_like_${item.contentId}_${idx}`} onClick={() => { trackClick(`btn_spang_like_${item.contentId}`, { contentId: item.contentId, category: cat.label }); navigate(`/detail/${item.contentId}`); }} style={{ flexShrink: 0, width: 110, textAlign: 'left' }}>
                 <div style={{ width: 110, height: 160, borderRadius: 8, overflow: 'hidden', position: 'relative' }}>
                   <img src={item.poster} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
@@ -219,7 +228,7 @@ export default function SpangHome() {
             { id: 'romance',    poster: '/assets/poster_romance.png' },
             { id: 'nextlegend', poster: '/assets/poster_nextlegend.png' },
           ].map((c, i) => (
-            <button key={c.id} id={`btn_top10_${c.id}`} onClick={() => { trackClick(`btn_top10_${c.id}`, { contentId: c.id, rank: i + 1 }); navigate(`/detail/${c.id}`); }} style={{ flexShrink: 0, width: 110, textAlign: 'left', position: 'relative' }}>
+            <button key={c.id} id={`btn_spang_top10_${c.id}`} onClick={() => { trackClick(`btn_spang_top10_${c.id}`, { contentId: c.id, rank: i + 1 }); navigate(`/detail/${c.id}`); }} style={{ flexShrink: 0, width: 110, textAlign: 'left', position: 'relative' }}>
               <div style={{ width: 110, height: 160, borderRadius: 8, overflow: 'hidden', marginBottom: 6 }}>
                 <img src={c.poster} alt={c.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
@@ -237,7 +246,7 @@ export default function SpangHome() {
           </div>
           <div style={{ display: 'flex', gap: 8, paddingLeft: 16, overflowX: 'auto', scrollbarWidth: 'none' }}>
             {cat.items.map((item, idx) => (
-              <button key={idx} id={`btn_cat_${item.contentId}_${idx}`} onClick={() => { trackClick(`btn_cat_${item.contentId}`, { contentId: item.contentId, category: cat.label }); navigate(`/detail/${item.contentId}`); }} style={{ flexShrink: 0, width: 110, textAlign: 'left' }}>
+              <button key={idx} id={`btn_spang_${CAT_KEYS[cat.label] || 'cat'}_${item.contentId}_${idx}`} onClick={() => { trackClick(`btn_spang_${CAT_KEYS[cat.label] || 'cat'}_${item.contentId}`, { contentId: item.contentId, category: cat.label }); navigate(`/detail/${item.contentId}`); }} style={{ flexShrink: 0, width: 110, textAlign: 'left' }}>
                 <div style={{ width: 110, height: 160, borderRadius: 8, overflow: 'hidden', position: 'relative' }}>
                   <img src={item.poster} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   {cat.label === '새로 올라온 스팡 콘텐츠' && (
