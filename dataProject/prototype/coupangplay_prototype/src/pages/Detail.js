@@ -375,8 +375,8 @@ export default function Detail() {
                 )}
               </div>
               <button
-                id="btn_detail_ad_banner"
-                onClick={() => { trackClick('btn_detail_ad_banner', { url: content.banners[0].url }); window.open(content.banners[0].url, '_blank'); }}
+                id={`btn_detail_ad_banner_${id}`}
+                onClick={() => { trackClick(`btn_detail_ad_banner_${id}`, { url: content.banners[0].url }); window.open(content.banners[0].url, '_blank'); }}
                 style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'block' }}
               >
                 <img
