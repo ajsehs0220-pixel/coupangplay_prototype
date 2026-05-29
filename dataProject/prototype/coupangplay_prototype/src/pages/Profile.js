@@ -159,14 +159,18 @@ export default function Profile() {
           </button>
           <div style={{ display: 'flex', gap: 8, overflowX: 'auto', scrollbarWidth: 'none' }}>
             {WISHLIST.map((item, idx) => (
-              <img
+              <button
                 key={idx}
                 id={`btn_profile_wishlist_${item.id}_${idx}`}
-                src={item.img}
-                alt=""
                 onClick={() => showToast('준비 중입니다')}
-                style={{ width: 90, height: 130, borderRadius: 8, objectFit: 'cover', flexShrink: 0, cursor: 'pointer' }}
-              />
+                style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', textAlign: 'left', flexShrink: 0 }}
+              >
+                <img
+                  src={item.img}
+                  alt=""
+                  style={{ width: 90, height: 130, borderRadius: 8, objectFit: 'cover', display: 'block' }}
+                />
+              </button>
             ))}
           </div>
         </div>
@@ -178,14 +182,18 @@ export default function Profile() {
           </button>
           <div style={{ display: 'flex', gap: 8, overflowX: 'auto', scrollbarWidth: 'none' }}>
             {RECOMMEND.map((item, idx) => (
-              <img
+              <button
                 key={item.id}
                 id={`btn_profile_rec_${item.id}_${idx}`}
-                src={item.img}
-                alt=""
                 onClick={() => { trackClick(`btn_profile_rec_${item.id}_${idx}`); navigate(`/detail/${item.id}`); }}
-                style={{ width: 90, height: 130, borderRadius: 8, objectFit: 'cover', flexShrink: 0, cursor: 'pointer' }}
-              />
+                style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', textAlign: 'left', flexShrink: 0 }}
+              >
+                <img
+                  src={item.img}
+                  alt=""
+                  style={{ width: 90, height: 130, borderRadius: 8, objectFit: 'cover', display: 'block' }}
+                />
+              </button>
             ))}
           </div>
         </div>

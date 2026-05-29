@@ -154,11 +154,11 @@ export default function SpangHome() {
           style={{ display: 'flex', overflowX: 'scroll', scrollSnapType: 'x mandatory', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {MAIN_BANNERS.map((banner, idx) => (
-            <div
+            <button
               key={idx}
               id={`btn_spang_banner_${banner.contentId}_${idx}`}
-              style={{ flex: '0 0 100%', scrollSnapAlign: 'start', position: 'relative', cursor: 'pointer' }}
               onClick={() => navigate(`/detail/${banner.contentId}`)}
+              style={{ flex: '0 0 100%', scrollSnapAlign: 'start', position: 'relative', background: 'none', border: 'none', padding: 0, cursor: 'pointer', textAlign: 'left' }}
             >
               <img
                 src={banner.img}
@@ -184,7 +184,7 @@ export default function SpangHome() {
                   재생하기
                 </button>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>

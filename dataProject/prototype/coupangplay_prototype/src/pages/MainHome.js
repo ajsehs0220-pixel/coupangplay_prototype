@@ -118,7 +118,7 @@ export default function MainHome() {
         </div>
 
         {/* 메인 포스터 이미지 */}
-        <div id="btn_main_hero_smile" style={{ position: 'relative', cursor: 'pointer' }} onClick={() => navigate('/detail/smile')}>
+        <button id="btn_main_hero_smile" onClick={() => navigate('/detail/smile')} style={{ position: 'relative', background: 'none', border: 'none', padding: 0, cursor: 'pointer', textAlign: 'left', width: '100%' }}>
           <img
             src="/assets/img_Main_home.png"
             alt="SNL Korea"
@@ -149,7 +149,7 @@ export default function MainHome() {
               재생하기
             </button>
           </div>
-        </div>
+        </button>
       </div>
 
       {/* 하단 배너 4개 - 한 화면에 다 보이게 */}
